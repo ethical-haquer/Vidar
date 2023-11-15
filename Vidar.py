@@ -1,5 +1,5 @@
 '''
-Vidar - Like the Thor Flash Utility, but written in Python with a GUI
+Vidar - Like the Thor Flash Utility, but written in Python and with a GUI
 Copyright (C) 2023  ethical_haquer
 
 This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
 
+from rich import print
+
 version = "Pre-Alpha"
 
 protocol = None
@@ -31,10 +33,6 @@ commands = [
     ("begin", "begin"),
     ("end", "end")
 ]
-
-print(f"Welcome to Vidar Shell {version}!")
-
-print("Type 'help' for list of commands.\nTo start off, type 'connect' to initiate a connection.")
 
 def get_description(command):
     if command == "disconnect":
@@ -58,18 +56,24 @@ def get_description(command):
     else:
         print(f"get_description was unable to provide the description for the '{command}' command")
 
+print(f"[#26A269]Welcome to Vidar Shell {version}![/]")
+print("[#26A269]Type '[#33DA7A]help[/]' for list of commands.[/]")
+print("[#26A269]To start off, type '[#33DA7A]connect[/]' to initiate a connection.[/]")
+
 while True:
     entered_command = input("shell> ")
     if entered_command == "quit" or entered_command == "exit":
-        print("Goodbye!")
+        print("[#E9AD0C]Goodbye![/]")
         break
     if entered_command == "help":
         if protocol == None:
-            print("Note: beggining a protocol session unlocks new commands for you to use")
-            print("Note: they can also override the default commands for extension purposes")
-        print("[required] {optional} - option list\n<required> (optional) - usual argument")
-        print(f"Total commands: {(len(commands) + 2)}")
+            print("[#26A269][bold][italic]Note: beggining a protocol session unlocks new commands for you to use[/][/][/]")
+            print("[#26A269][bold][italic]Note: they can also override the default commands for extension purposes[/][/][/]")
+        print("[#E9AD0C]\[required] {optional} - option list[/]")
+        print("[#E9AD0C]<required> (optional) - usual argument[/]")
+        print(f"[#26A269]Total commands: {(len(commands) + 2)}[/]")
+        print("[#33C7DE]exit - Closes the shell, quit also works[/]")
         for command, function in commands:
             description = get_description(command)
             if protocol == None:
-                print(description)
+                print(f"[#33C7DE]{description}[/]")
