@@ -1,6 +1,6 @@
 # Vidar
 
-A rewrite of the [Thor Flash Utility](https://github.com/Samsung-Loki/Thor) in Python. It is currently under development and not usable.
+Like the [Thor Flash Utility](https://github.com/Samsung-Loki/Thor), but written in Python with a GUI.It is currently under development and not usable.
 Once it is in a working state, this repository will be deleted and it will become [Thor GUI](https://github.com/ethical-haquer/Thor_GUI) v0.5.0. Also, starting with the release of Thor GUI v0.5.0, Thor GUI will be renamed Vidar. 
 
 ## Why Vidar?
