@@ -56,6 +56,9 @@ def get_description(command):
     else:
         print(f"get_description was unable to provide the description for the '{command}' command")
 
+def run_command(command):
+    print(f"[#26A269]Would have ran the '[#33DA7A]{command}[/]' command[/]")
+
 print(f"[#26A269]Welcome to Vidar Shell {version}![/]")
 print("[#26A269]Type '[#33DA7A]help[/]' for list of commands.[/]")
 print("[#26A269]To start off, type '[#33DA7A]connect[/]' to initiate a connection.[/]")
@@ -63,9 +66,9 @@ print("[#26A269]To start off, type '[#33DA7A]connect[/]' to initiate a connectio
 while True:
     entered_command = input("shell> ")
     if entered_command == "quit" or entered_command == "exit":
-        print("[#E9AD0C]Goodbye![/]")
+        print("[#33DA7A]Goodbye![/]")
         break
-    if entered_command == "help":
+    elif entered_command == "help":
         if protocol == None:
             print("[#26A269][bold][italic]Note: beggining a protocol session unlocks new commands for you to use[/][/][/]")
             print("[#26A269][bold][italic]Note: they can also override the default commands for extension purposes[/][/][/]")
@@ -77,3 +80,7 @@ while True:
             description = get_description(command)
             if protocol == None:
                 print(f"[#33C7DE]{description}[/]")
+    elif entered_command not in [i[0] for i in commands]:
+        print('[#f66151]This command does not exist[/]')
+    else:
+        run_command(entered_command)
