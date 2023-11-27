@@ -10,6 +10,19 @@ In Norse mythology, [Vidar](https://en.wikipedia.org/wiki/V%C3%AD%C3%B0arr) is o
 
 Vidar will look just like Thor GUI, but instead of using Thor externally, it will be self-contained. Basically, Vidar will be like Thor written in Python and then combined with Thor GUI.
 
+## Disclaimer
+
+Currently, Vidar is in a Pre-Alpha stage. That means it is under development and not ready for end users.
+
+## Known Bugs
+
+None.
+
+## Implemented Thor commands
+
+- [x] help
+- [x] exit / quit
+
 # Development
 Want to contribute code or test things out? Follow the below directions to get Vidar up and running on your system.
 
