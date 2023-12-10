@@ -20,7 +20,6 @@ import tkinter as tk
 from tkinter import scrolledtext
 from tkinter import filedialog
 import webbrowser
-from time import sleep
 import os
 from functools import partial
 import sv_ttk
@@ -32,7 +31,6 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 import platform
 import vidar
 from threading import Timer
-from time import sleep
 import typing as typ
 
 version = 'Pre-Alpha'
@@ -56,10 +54,10 @@ tooltip_list = [
         ('Connect_Button', 'Connect a device in download mode'),
         ('Begin_Button', 'Start an Odin session'),
         ('Command_Entry', 'You can enter a Thor command here,\nand press enter to send it'),
-        ('Enter_Button', 'Send Thor an \'Enter\''),
-        ('Space_Button', 'Send Thor a \'Space\''),
-        ('Page_Up_Button', 'Send Thor a \'Page Up\''),
-        ('Page_Down_Button', 'Send Thor a \'Page Down\''),
+        ('Enter_Button', "Send Thor an 'Enter'"),
+        ('Space_Button', "Send Thor a 'Space'"),
+        ('Page_Up_Button', "Send Thor a 'Page Up'"),
+        ('Page_Down_Button', "Send Thor a 'Page Down'"),
         ('BL_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
         ('AP_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
         ('CP_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
@@ -68,13 +66,13 @@ tooltip_list = [
         ('BL_Button', 'Select a BL file'),
         ('AP_Button', 'Select an AP file'),
         ('CP_Button', 'Select a CP file'),
-        ('CSC_Button', 'Select a SCS file'),
+        ('CSC_Button', 'Select a CSC file'),
         ('USERDATA_Button', 'Select a USERDATA file'),
-        ('BL_Entry', 'Drag and drop a BL file here, or paste it\'s path'),
-        ('AP_Entry', 'Drag and drop an AP file here, or paste it\'s path'),
-        ('CP_Entry', 'Drag and drop a CP file here, or paste it\'s path'),
-        ('CSC_Entry', 'Drag and drop a CSC file here, or paste it\'s path'),
-        ('USERDATA_Entry', 'Drag and drop a USERDATA file here, or paste it\'s path'),
+        ('BL_Entry', "Drag and drop a BL file here, or paste it's path"),
+        ('AP_Entry', "Drag and drop an AP file here, or paste it's path"),
+        ('CP_Entry', "Drag and drop a CP file here, or paste it's path"),
+        ('CSC_Entry', "Drag and drop a CSC file here, or paste it's path"),
+        ('USERDATA_Entry', "Drag and drop a USERDATA file here, or paste it's path"),
         ('Log_Button', 'Log Tab'),
         ('Options_Button', 'Options Tab'),
         ('Pit_Button', 'Pit Tab'),
@@ -108,7 +106,7 @@ if os.path.isfile(f'{path_to_vidar_gui}/vidar-gui_settings.pkl'):
     filed_version = pickle.load(f2)
     f2.close()
     if filed_version != version:
-        print(f'The found \'vidar-gui_settings.pkl\' file was not created by this version of Vidar_GUI, so Vidar GUI is updating it.')
+        print("The found 'vidar-gui_settings.pkl' file was not created by this version of Vidar_GUI, so Vidar GUI is updating it.")
         if filed_version == 'Alpha v0.4.0':
             filed_version = version
             initial_directory = '~'
@@ -160,11 +158,11 @@ if os.path.isfile(f'{path_to_vidar_gui}/vidar-gui_settings.pkl'):
             pickle.dump(thor_directory, f1)
             f1.close()
 else:
-    print(f'The \'vidar-gui_settings.pkl\' file was not found in the directory that this program is being run from ({path_to_vidar_gui}), so Vidar GUI is creating it.')
+    print(f"The 'vidar-gui_settings.pkl' file was not found in the directory that this program is being run from ({path_to_vidar_gui}), so Vidar GUI is creating it.")
     filed_version = version
     theme = 'light'
-    tooltips = 'on'
-    sudo = 'off'
+    tooltips = True
+    sudo = False
     initial_directory = '~'
     first_run = True
     thor = "internal"
@@ -220,11 +218,11 @@ def create_tooltips():
     delay = 0.25
 #    ToolTip(button, msg='Connect a device in download mode', delay=delay)
 #    ToolTip(Begin_Button, msg='Start an Odin session', delay=delay)
-    ToolTip(Command_Entry, msg='You can enter a Thor command here,\nand press enter to send it', delay=delay)
-#    ToolTip(Enter_Button, msg='Send Thor an \'Enter\'', delay=delay)
-#    ToolTip(Space_Button, msg='Send Thor a \'Space\'', delay=delay)
-#    ToolTip(Page_Up_Button, msg='Send Thor a \'Page Up\'', delay=delay)
-#    ToolTip(Page_Down_Button, msg='Send Thor a \'Page Down\'', delay=delay)
+#    ToolTip(Command_Entry, msg='You can enter a Thor command here,\nand press enter to send it', delay=delay)
+#    ToolTip(Enter_Button, msg='Send Thor an 'Enter'', delay=delay)
+#    ToolTip(Space_Button, msg='Send Thor a 'Space'', delay=delay)
+#    ToolTip(Page_Up_Button, msg='Send Thor a 'Page Up'', delay=delay)
+#    ToolTip(Page_Down_Button, msg='Send Thor a 'Page Down'', delay=delay)
     ToolTip(BL_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
     ToolTip(AP_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
     ToolTip(CP_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
@@ -235,11 +233,11 @@ def create_tooltips():
 #    ToolTip(CP_Button, msg='Select a CP file', delay=delay)
 #    ToolTip(CSC_Button, msg='Select a CSC file', delay=delay)
 #    ToolTip(USERDATA_Button, msg='Select a USERDATA file', delay=delay)
-    ToolTip(BL_Entry, msg='Drag and drop a BL file here, or paste it\'s path', delay=delay)
-    ToolTip(AP_Entry, msg='Drag and drop an AP file here, or paste it\'s path', delay=delay)
-    ToolTip(CP_Entry, msg='Drag and drop a CP file here, or paste it\'s path', delay=delay)
-    ToolTip(CSC_Entry, msg='Drag and drop a CSC file here, or paste it\'s path', delay=delay)
-    ToolTip(USERDATA_Entry, msg='Drag and drop a USERDATA file here, or paste it\'s path', delay=delay)
+#    ToolTip(BL_Entry, msg='Drag and drop a BL file here, or paste it's path', delay=delay)
+#    ToolTip(AP_Entry, msg='Drag and drop an AP file here, or paste it's path', delay=delay)
+#    ToolTip(CP_Entry, msg='Drag and drop a CP file here, or paste it's path', delay=delay)
+#    ToolTip(CSC_Entry, msg='Drag and drop a CSC file here, or paste it's path', delay=delay)
+#    ToolTip(USERDATA_Entry, msg='Drag and drop a USERDATA file here, or paste it's path', delay=delay)
 #    ToolTip(Log_Button, msg='Log Tab', delay=delay)
 #    ToolTip(Options_Button, msg='Options Tab', delay=delay)
 #    ToolTip(Pit_Button, msg='Pit Tab', delay=delay)
@@ -250,9 +248,9 @@ def create_tooltips():
     ToolTip(Theme_Toggle, msg='Toggle Theme', delay=delay)
     ToolTip(Tooltip_Toggle, msg='Toggle Tooltips', delay=delay)
     ToolTip(Thor_Toggle, msg='Toggle using an internal/external Thor build', delay=delay)
-    ToolTip(Thor_Entry, msg="Vidar GUI will look for the external Thor build in this directory", delay=delay)
+#    ToolTip(Thor_Entry, msg="Vidar GUI will look for the external Thor build in this directory", delay=delay)
     ToolTip(Sudo_Toggle, msg='Toggle running Thor with/without sudo', delay=delay)
-    ToolTip(Default_Directory_Entry, msg='The file picker will open to this directory', delay=delay)
+#    ToolTip(Default_Directory_Entry, msg='The file picker will open to this directory', delay=delay)
 #    ToolTip(Start_Flash_Button, msg='Start a flash', delay=delay)
 #    ToolTip(Reset_Button, msg='Reset the options in the Options Tab to defaults, and clear the Odin archive check-boxes and archive entries', delay=delay)
     
@@ -332,7 +330,7 @@ def show_message(title, message, buttons, window_size=(300, 100)):
         button_text = button.get('text', 'OK')
         button_fg = button.get('fg', 'black')
         button_command = button.get('command', Message_Window.destroy)
-        Button_Widget = ttk.Button(Message_Window, text=button_text, command=button_command)
+        Button_Widget = ttk.Button(Message_Window, text=button_text, command=button_command, fg=button_fg)
         Button_Widget.grid(row=row, pady=5)
         row = row + 1
 
@@ -342,27 +340,10 @@ def open_file(type):
     try:
         def change_theme():
             sv_ttk.set_theme('dark')
-            window.attributes('-topmost', 1)
-            window.attributes('-topmost', 0)
-            i = 0.0
-            for i in range(10):
-                window.attributes('-alpha', i)
-                i = i + 0.1
-                sleep(0.1)
-#            window.attributes("-alpha", 1)
-#            window.deiconify()
-#        window.iconify()
-#        window.attributes("-alpha", 0)
-        i = 1.0
-        for i in range(10):
-            window.attributes('-alpha', i)
-            i = i - 0.1
-            sleep(0.1)
-            window.update()
         sv_ttk.set_theme('light')
         initialdir = Default_Directory_Entry.get()
         t = Timer(0, change_theme)
-        t.start() # after 5 seconds, "hello, world" will be printed
+        t.start()
         if initialdir == '~' or os.path.isdir(initialdir) == True:
             initial_directory = initialdir
             if type == 'AP':
@@ -385,12 +366,12 @@ def open_file(type):
                 elif type == 'USERDATA':
                     USERDATA_Entry.delete(0, 'end')
                     USERDATA_Entry.insert(0, file_path)
-                print(f'Selected {type}: \'{file_path}\' with file picker')
+                print(f"Selected {type}: '{file_path}' with file picker")
         else:
-            print(f'Invalid directory - The directory: \'{initialdir}\' does not exist. You can change your initial file picker directory by going to: Settings - Flashing - Initial file picker directory')
-            show_message('Invalid directory', f'The directory: \'{initialdir}\' does not exist\nYou can change your initial file picker directory by going to:\nSettings - Flashing - Initial file picker directory', [{'text': 'OK', 'fg': 'black'}], window_size=(480, 140))
+            print(f"Invalid directory - The directory: '{initialdir}' does not exist. You can change your initial file picker directory by going to: Settings - Flashing - Initial file picker directory")
+            show_message('Invalid directory', f"The directory: '{initialdir}' does not exist\nYou can change your initial file picker directory by going to:\nSettings - Flashing - Initial file picker directory", [{'text': 'OK', 'fg': 'black'}], window_size=(480, 140))
 #    except ttk.TclError:
-#        print('Vidar GUI was closed with the file picker still open - Don\'t do that. :)')
+#        print('Vidar GUI was closed with the file picker still open - Don't do that. :)')
     except Exception as e:
         print(f'An exception occurred in open_file: {e}')
 
@@ -442,16 +423,16 @@ def change_variable(variable):
             theme = 'dark'
         sv_ttk.set_theme(theme)
     elif variable == 'tooltips':
-        if tooltips == 'on':
-            tooltips = 'off'
-        elif tooltips == 'off':
-            tooltips = 'on'
-            create_tooltips()
+        tooltips = not tooltips
+        create_tooltips()
     elif variable == 'sudo':
+        sudo = not sudo
+        """
         if sudo == 'on':
             sudo = 'off'
         elif sudo == 'off':
             sudo = 'on'
+        """
     elif variable == 'thor':
         if thor == 'internal':
             thor = 'external'
@@ -464,11 +445,11 @@ def change_variable(variable):
 def create_startup_window():
     try:
         if operating_system == 'Linux':
-            compatibility_message = 'It looks like you\'re using Linux, so you\'re good to go!'
+            compatibility_message = "It looks like you're using Linux, so you're good to go!"
         elif operating_system == 'Windows':
-            compatibility_message = 'It looks like you\'re using Windows, so sadly Vidar GUI won\'t work for you.'
+            compatibility_message = "It looks like you're using Windows, so sadly Vidar GUI won't work for you."
         elif operating_system == 'Darwin':
-            compatibility_message = 'It looks like you\'re using macOS, so sadly Vidar GUI won\'t work for you.'
+            compatibility_message = "It looks like you're using macOS, so sadly Vidar GUI won't work for you."
         Startup_Window = tk.Toplevel(window)
         Startup_Window.title('Vidar GUI - A GUI for the Thor Flash Utility')
         Startup_Window.wm_transient(window)
@@ -480,10 +461,10 @@ def create_startup_window():
         Label = ttk.Label(Startup_Window, text='Welcome to Vidar GUI!', font=('Monospace', 11), anchor='center')
         Label.grid(row=0, column=0, columnspan=2, pady=9)
 
-        Label2 = ttk.Label(Startup_Window, text='If you\'re not sure how to use Vidar GUI, click the \'Help\' tab.', font=('Monospace', 11), anchor='center')
+        Label2 = ttk.Label(Startup_Window, text="If you're not sure how to use Vidar GUI, click the 'Help' tab.", font=('Monospace', 11), anchor='center')
         Label2.grid(row=2, column=0, columnspan=2, pady=9)
 
-        Label3 = ttk.Label(Startup_Window, text='For info about Vidar GUI, click the \'About\' tab.', font=('Monospace', 11), anchor='center')
+        Label3 = ttk.Label(Startup_Window, text="For info about Vidar GUI, click the 'About' tab.", font=('Monospace', 11), anchor='center')
         Label3.grid(row=1, column=0, columnspan=2, pady=9)
 
         Label4 = ttk.Label(Startup_Window, text='Vidar GUI currently only supports Linux.', font=('Monospace', 11), anchor='center')
@@ -492,7 +473,7 @@ def create_startup_window():
         Label5 = ttk.Label(Startup_Window, text=compatibility_message, font=('Monospace', 11), anchor='center')
         Label5.grid(row=4, column=0, columnspan=2, pady=9)
 
-        Label6 = ttk.Label(Startup_Window, text='Click \'Close\' to close this window, or \'Cancel\' to close Vidar GUI.', font=('Monospace', 11), anchor='center')
+        Label6 = ttk.Label(Startup_Window, text="Click 'Close' to close this window, or 'Cancel' to close Vidar GUI.", font=('Monospace', 11), anchor='center')
         Label6.grid(row=6, column=0, columnspan=2, pady=9)
 
         def send_cancel():
@@ -524,67 +505,18 @@ def create_startup_window():
 def on_window_close():
     global Thor, prompt_available, Message_Window
     try:
-        def force_stop():
-            Thor.sendline('exit')
-            Thor.terminate()
-            Thor.wait()
-            print('Stopped Thor (possibly forcibly)')
-            Force_Close_Window.destroy()
-            print('Stopping Vidar GUI...')
-            f1 = open(f'{path_to_vidar_gui}/vidar-gui_settings.pkl', 'wb')
-            pickle.dump(filed_version, f1)
-            pickle.dump(theme, f1)
-            pickle.dump(tooltips, f1)
-            pickle.dump(sudo, f1)
-            pickle.dump(initial_directory, f1)
-            pickle.dump(first_run, f1)
-            pickle.dump(thor, f1)
-            pickle.dump(thor_directory, f1)
-            f1.close()
-            window.destroy()
-            if prompt_available == True:
-                Thor.sendline('exit')
-                Thor.terminate()
-                Thor.wait()
-                print('Stopped Thor')
-                print('Stopping Vidar GUI...')
-                f1 = open(f'{path_to_vidar_gui}/vidar-gui_settings.pkl', 'wb')
-                pickle.dump(filed_version, f1)
-                pickle.dump(theme, f1)
-                pickle.dump(tooltips, f1)
-                pickle.dump(sudo, f1)
-                pickle.dump(initial_directory, f1)
-                pickle.dump(first_run, f1)
-                pickle.dump(thor, f1)
-                pickle.dump(thor_directory, f1)
-                f1.close()
-                window.destroy()
-            elif prompt_available == False:
-                Force_Close_Window = tk.Toplevel(window)
-                Force_Close_Window.title('Force Stop Thor')
-                Force_Close_Window.wm_transient(window)
-                Force_Close_Window.grab_set()
-                Force_Close_Window.update_idletasks()
-                Force_Close_Window.columnconfigure(0, weight=1)
-                Force_Close_Window.columnconfigure(1, weight=1)
-                width = 786
-                height = 132
-                x = window.winfo_rootx() + (window.winfo_width() - width) // 2
-                y = window.winfo_rooty() + (window.winfo_height() - height) // 2
-                Force_Close_Window.geometry(f'{width}x{height}+{x}+{y}')
-                Force_Close_Label = ttk.Label(Force_Close_Window, text='The \'shell>\' prompt isn\'t available, so the \'exit\' command can\'t be sent.', font=('Monospace', 11), anchor='center')
-                Force_Close_Label.grid(columnspan=2, column=0, row=0, sticky='we', pady=(5,2))
-                Force_Close_Label_2 = ttk.Label(Force_Close_Window, text='Thor may be busy, or locked up.', font=('Monospace', 11), anchor='center')
-                Force_Close_Label_2.grid(columnspan=2, column=0, row=1, sticky='we', pady=2)
-                Force_Close_Label_3 = ttk.Label(Force_Close_Window, text='You may force stop Thor by clicking the \'Force Stop\' button.', font=('Monospace', 11), anchor='center')
-                Force_Close_Label_3.grid(columnspan=2, column=0, row=2, sticky='we', pady=2)
-                Force_Close_Label_4 = ttk.Label(Force_Close_Window, text='However, if Thor is in the middle of a flash or something, there will be consequences.', font=('Monospace', 11), anchor='center')
-                Force_Close_Label_4.grid(columnspan=2, column=0, row=3, sticky='we', padx=5, pady=(0,5))
-                Cancel_Force_Stop_Button = ttk.Button(Force_Close_Window, text='Cancel', command=Force_Close_Window.destroy)
-                Cancel_Force_Stop_Button.grid(column=0, row=4, sticky='we', pady=5, padx=(5,2.5))
-                Force_Stop_Button = ttk.Button(Force_Close_Window, text='Force Stop', command=force_stop)
-                Force_Stop_Button.grid(column=1, row=4, sticky='we', pady=5, padx=(2.5,5))
-                Force_Close_Window.mainloop()
+        print('Stopping Vidar GUI...')
+        f1 = open(f'{path_to_vidar_gui}/vidar-gui_settings.pkl', 'wb')
+        pickle.dump(filed_version, f1)
+        pickle.dump(theme, f1)
+        pickle.dump(tooltips, f1)
+        pickle.dump(sudo, f1)
+        pickle.dump(initial_directory, f1)
+        pickle.dump(first_run, f1)
+        pickle.dump(thor, f1)
+        pickle.dump(thor_directory, f1)
+        f1.close()
+        window.destroy()
     except Exception as e:
         print(f'An exception occurred in on_window_close: {e}')
 
@@ -616,6 +548,39 @@ class Button():
 
     def __getattr__(self, attr):
         return getattr(self.button, attr)
+
+class Entry():
+    def __init__(self, name: str, master: ttk.Frame,
+        state: str = 'normal', 
+        column: int = 0,
+        row: int = 0,
+        sticky: str = 'we',
+        padx: int = 5,
+        pady: int = 5, 
+        columnspan: int = 1):
+            
+        self.name = name + '_Entry'
+        self.master = master
+        self.state = state
+        self.column = column
+        self.row = row
+        self.sticky = sticky
+        self.padx = padx
+        self.pady = pady
+        self.columnspan = columnspan
+        self.tooltip_delay = 0.25
+        self.entry = ttk.Entry(self.master, state=self.state)
+        self.entry.grid(column=self.column, row=self.row, columnspan=self.columnspan, sticky=self.sticky, padx=self.padx, pady=self.pady)
+        self.create_tooltip(tooltip_list)
+
+    def create_tooltip(self, tooltip_list: typ.Optional[typ.List[typ.Tuple[str, str]]] = None):
+        for tooltip_widget, msg in tooltip_list:
+            if tooltip_widget == self.name:
+                ToolTip(self.entry, msg=msg, delay=self.tooltip_delay)
+
+    def __getattr__(self, attr):
+        return getattr(self.entry, attr)
+    
 
 def create_label(name, master, text, font=('Monospace', 11), sticky='we', padx=0, pady=0, anchor='center'):
     label = name + '_Label'
@@ -660,8 +625,7 @@ Title_Label.grid(row=0, column=0, columnspan=7, rowspan=2, sticky='nesw')
 Connect_Button = Button('Connect', window, 'Connect', toggle_connection, 'normal', 8, 0, 'we', (5, 2.5), 5)
 Begin_Button = Button('Begin', window, 'Start Odin Protocol', toggle_odin, 'normal', 10, 0, 'we', (2.5, 5), 5)
 
-Command_Entry = ttk.Entry(window, state='disabled')
-Command_Entry.grid(row=1, column=8, columnspan=4, padx=5, sticky='nesw')
+Command_Entry = Entry('Command', window, 'disabled', 8, 1, 'nesw', 5, 0, 4)
 Command_Entry.bind('<Return>', lambda event: vidar.run_command(Command_Entry.get(), 'entry'))
 
 Enter_Button = Button('Enter', window, 'Enter', lambda: Thor.send('\n'), 'disabled', 8, 2, 'ew', 5)
@@ -700,24 +664,16 @@ CSC_Button = Button('CSC', window, 'CSC', lambda: open_file('CSC'), 'normal', 8 
 USERDATA_Button = Button('USERDATA', window, 'USERDATA', lambda: open_file('USERDATA'), 'normal', 8 , 7, 'we', 4)
 
 # Creates the Odin archive Entries
-BL_Entry = ttk.Entry(window)
-BL_Entry.grid(row=3, column=9, columnspan=3, sticky='we', padx=5)
+BL_Entry = Entry('BL', window, 'normal', 9, 3, 'we', 5, 0, 3)
+AP_Entry = Entry('AP', window, 'normal', 9, 4, 'we', 5, 0, 3)
+CP_Entry = Entry('CP', window, 'normal', 9, 5, 'we', 5, 0, 3)
+CSC_Entry = Entry('CSC', window, 'normal', 9, 6, 'we', 5, 0, 3)
+USERDATA_Entry = Entry('USERDATA', window, 'normal', 9, 7, 'we', 5, 0, 3)
+
 bind_file_drop(BL_Entry)
-
-AP_Entry = ttk.Entry(window)
-AP_Entry.grid(row=4, column=9, columnspan=3, sticky='we', padx=5)
 bind_file_drop(AP_Entry)
-
-CP_Entry = ttk.Entry(window)
-CP_Entry.grid(row=5, column=9, columnspan=3, sticky='we', padx=5)
 bind_file_drop(CP_Entry)
-
-CSC_Entry = ttk.Entry(window)
-CSC_Entry.grid(row=6, column=9, columnspan=3, sticky='we', padx=5)
 bind_file_drop(CSC_Entry)
-
-USERDATA_Entry = ttk.Entry(window)
-USERDATA_Entry.grid(row=7, column=9, columnspan=3, sticky='we', padx=5)
 bind_file_drop(USERDATA_Entry)
 
 # Creates the five Frame Buttons
@@ -741,7 +697,7 @@ Output_Text.grid(row=0, column=0, rowspan=6, sticky='nesw')
 Options_Frame = ttk.Frame(window)
 Options_Frame.grid(row=3, rowspan=6, column=0, columnspan=7, sticky='nesw', padx=5)
 
-NOTE_Label = ttk.Label(Options_Frame, text='NOTE: The \'T Flash\' option is temporarily not supported by Vidar GUI.')
+NOTE_Label = ttk.Label(Options_Frame, text="NOTE: The 'T Flash' option is temporarily not supported by Vidar GUI.")
 NOTE_Label.grid(row=0, column=0, pady=10, padx=10, sticky='w')
 
 TFlash_Option_var = tk.IntVar()
@@ -757,7 +713,7 @@ EFSClear_Option_var = tk.IntVar()
 EFSClear_Option = ttk.Checkbutton(Options_Frame, variable=EFSClear_Option_var, text='EFS Clear')
 EFSClear_Option.grid(row=3, column=0, pady=10, padx=10, sticky='w')
 
-EFSClear_Label = ttk.Label(Options_Frame, text='Wipes the EFS partition (WARNING: You better know what you\'re doing!)', cursor='hand2')
+EFSClear_Label = ttk.Label(Options_Frame, text="Wipes the EFS partition (WARNING: You better know what you're doing!)", cursor='hand2')
 EFSClear_Label.grid(row=4, column=0, pady=10, padx=10, sticky='w')
 
 EFSClear_Label.bind('<ButtonRelease-1>', lambda e: open_link('https://android.stackexchange.com/questions/185679/what-is-efs-and-msl-in-android'))
@@ -801,14 +757,14 @@ if theme == 'light':
 elif theme == 'dark':
     other_theme = 'Light'
 
-if tooltips == 'on':
+if tooltips == True:
     other_tooltip = 'off'
-elif tooltips == 'off':
+elif tooltips == False:
     other_tooltip = 'on'
 
-if sudo == 'on':
+if sudo == True:
     other_sudo = 'without'
-elif sudo == 'off':
+elif sudo == False:
     other_sudo = 'with'
     
 if thor == "internal":
@@ -831,8 +787,7 @@ Thor_Toggle.grid(row=5, column=0, padx=10, sticky='w')
 
 create_label('Thor_Directory', Settings_Frame, 'Path to external Thor build:', ('Monospace', 9), 'w', 15, 5)
 
-Thor_Entry = ttk.Entry(Settings_Frame)
-Thor_Entry.grid(row=7, column=0, padx=(15, 120), sticky='we')
+Thor_Entry = Entry('Thor', Settings_Frame, 'normal', 0, 7, 'we', (15, 120))
 Thor_Entry.insert(tk.END, thor_directory)
 if thor == "internal":
     Thor_Entry.configure(state="disabled")
@@ -846,8 +801,7 @@ create_label('Flashing', Settings_Frame, 'Flashing', ('Monospace', 12), 'w')
 
 create_label('Default_Directory', Settings_Frame, 'Initial file picker directory:', ('Monospace', 9), 'w', 15, 5)
 
-Default_Directory_Entry = ttk.Entry(Settings_Frame)
-Default_Directory_Entry.grid(row=12, column=0, padx=(15, 120), sticky='we')
+Default_Directory_Entry = Entry('Default_Directory', Settings_Frame, 'normal', 0, 12, 'we', (15, 120))
 Default_Directory_Entry.insert(tk.END, initial_directory)
 
 # Creates the 'Help' frame
@@ -945,13 +899,13 @@ Output_Text.tag_configure('dark_blue', foreground='#2A7BDE')
 toggle_frame('Log')
 
 # Binds the on_window_close function to the window's close event
-#window.protocol('WM_DELETE_WINDOW', on_window_close)
+window.protocol('WM_DELETE_WINDOW', on_window_close)
 
 # Sets what theme to use
 sv_ttk.set_theme(theme)
 
 # Creates tooltips for buttons and things
-if tooltips == 'on':
+if tooltips == True:
     create_tooltips()
 
 # Shows the setup window if first_run == True
