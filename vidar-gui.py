@@ -58,11 +58,11 @@ tooltip_list = [
         ('Space_Button', "Send Thor a 'Space'"),
         ('Page_Up_Button', "Send Thor a 'Page Up'"),
         ('Page_Down_Button', "Send Thor a 'Page Down'"),
-        ('BL_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
-        ('AP_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
-        ('CP_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
-        ('CSC_Button', 'The Odin archives selected with these check-boxes will be flashed'),
-        ('USERDATA_Checkbox', 'The Odin archives selected with these check-boxes will be flashed'),
+        ('BL_Checkbutton', 'The Odin archives selected with these check-boxes will be flashed'),
+        ('AP_Checkbutton', 'The Odin archives selected with these check-boxes will be flashed'),
+        ('CP_Checkbutton', 'The Odin archives selected with these check-boxes will be flashed'),
+        ('CSC_Checkbutton', 'The Odin archives selected with these check-boxes will be flashed'),
+        ('USERDATA_Checkbutton', 'The Odin archives selected with these check-boxes will be flashed'),
         ('BL_Button', 'Select a BL file'),
         ('AP_Button', 'Select an AP file'),
         ('CP_Button', 'Select a CP file'),
@@ -213,47 +213,6 @@ def set_widget_state(*args, state='normal', text=None):
         if text is not None:
             widget.configure(text=text)
 
-# Creates the tooltips; as you can see, it is being phased-out
-def create_tooltips():
-    delay = 0.25
-#    ToolTip(button, msg='Connect a device in download mode', delay=delay)
-#    ToolTip(Begin_Button, msg='Start an Odin session', delay=delay)
-#    ToolTip(Command_Entry, msg='You can enter a Thor command here,\nand press enter to send it', delay=delay)
-#    ToolTip(Enter_Button, msg='Send Thor an 'Enter'', delay=delay)
-#    ToolTip(Space_Button, msg='Send Thor a 'Space'', delay=delay)
-#    ToolTip(Page_Up_Button, msg='Send Thor a 'Page Up'', delay=delay)
-#    ToolTip(Page_Down_Button, msg='Send Thor a 'Page Down'', delay=delay)
-    ToolTip(BL_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
-    ToolTip(AP_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
-    ToolTip(CP_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
-    ToolTip(CSC_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
-    ToolTip(USERDATA_Checkbox, msg='The Odin archives selected with these check-boxes will be flashed', delay=delay)
-#    ToolTip(BL_Button, msg='Select a BL file', delay=delay)
-#    ToolTip(AP_Button, msg='Select an AP file', delay=delay)
-#    ToolTip(CP_Button, msg='Select a CP file', delay=delay)
-#    ToolTip(CSC_Button, msg='Select a CSC file', delay=delay)
-#    ToolTip(USERDATA_Button, msg='Select a USERDATA file', delay=delay)
-#    ToolTip(BL_Entry, msg='Drag and drop a BL file here, or paste it's path', delay=delay)
-#    ToolTip(AP_Entry, msg='Drag and drop an AP file here, or paste it's path', delay=delay)
-#    ToolTip(CP_Entry, msg='Drag and drop a CP file here, or paste it's path', delay=delay)
-#    ToolTip(CSC_Entry, msg='Drag and drop a CSC file here, or paste it's path', delay=delay)
-#    ToolTip(USERDATA_Entry, msg='Drag and drop a USERDATA file here, or paste it's path', delay=delay)
-#    ToolTip(Log_Button, msg='Log Tab', delay=delay)
-#    ToolTip(Options_Button, msg='Options Tab', delay=delay)
-#    ToolTip(Pit_Button, msg='Pit Tab', delay=delay)
-#    ToolTip(Settings_Button, msg='Settings Tab', delay=delay)
-#    ToolTip(Help_Button, msg='Help Tab', delay=delay)
-#    ToolTip(About_Button, msg='About Tab', delay=delay)
-#    ToolTip(Apply_Options_Button, msg='Apply the above options', delay=delay)
-    ToolTip(Theme_Toggle, msg='Toggle Theme', delay=delay)
-    ToolTip(Tooltip_Toggle, msg='Toggle Tooltips', delay=delay)
-    ToolTip(Thor_Toggle, msg='Toggle using an internal/external Thor build', delay=delay)
-#    ToolTip(Thor_Entry, msg="Vidar GUI will look for the external Thor build in this directory", delay=delay)
-    ToolTip(Sudo_Toggle, msg='Toggle running Thor with/without sudo', delay=delay)
-#    ToolTip(Default_Directory_Entry, msg='The file picker will open to this directory', delay=delay)
-#    ToolTip(Start_Flash_Button, msg='Start a flash', delay=delay)
-#    ToolTip(Reset_Button, msg='Reset the options in the Options Tab to defaults, and clear the Odin archive check-boxes and archive entries', delay=delay)
-    
 # Changes a tooltip
 def change_tooltip(widget, message):
     delay = 0.25
@@ -272,11 +231,11 @@ def reset():
         EFSClear_Option_var.set(False)
         BootloaderUpdate_Option_var.set(False)
         ResetFlashCount_Option_var.set(True)
-        BL_Checkbox_var.set(False)
-        AP_Checkbox_var.set(False)
-        CP_Checkbox_var.set(False)
-        CSC_Checkbox_var.set(False)
-        USERDATA_Checkbox_var.set(False)
+        BL_Checkbutton_var.set(False)
+        AP_Checkbutton_var.set(False)
+        CP_Checkbutton_var.set(False)
+        CSC_Checkbutton_var.set(False)
+        USERDATA_Checkbutton_var.set(False)
         BL_Entry.delete(0, 'end')
         AP_Entry.delete(0, 'end')
         CP_Entry.delete(0, 'end')
@@ -305,7 +264,7 @@ def log(text):
         Output_Text.insert(tk.END, line + '\n', color)
     Output_Text.configure(state='disabled')
 
-# Opens message-boxes - Used by start_flash
+# Opens message-boxes - Used by nothing :) - Will be replaced by a class
 def show_message(title, message, buttons, window_size=(300, 100)):
     global Message_Window
 
@@ -369,7 +328,7 @@ def open_file(type):
                 print(f"Selected {type}: '{file_path}' with file picker")
         else:
             print(f"Invalid directory - The directory: '{initialdir}' does not exist. You can change your initial file picker directory by going to: Settings - Flashing - Initial file picker directory")
-            show_message('Invalid directory', f"The directory: '{initialdir}' does not exist\nYou can change your initial file picker directory by going to:\nSettings - Flashing - Initial file picker directory", [{'text': 'OK', 'fg': 'black'}], window_size=(480, 140))
+#            show_message('Invalid directory', f"The directory: '{initialdir}' does not exist\nYou can change your initial file picker directory by going to:\nSettings - Flashing - Initial file picker directory", window_size=(480, 140))
 #    except ttk.TclError:
 #        print('Vidar GUI was closed with the file picker still open - Don't do that. :)')
     except Exception as e:
@@ -424,15 +383,10 @@ def change_variable(variable):
         sv_ttk.set_theme(theme)
     elif variable == 'tooltips':
         tooltips = not tooltips
-        create_tooltips()
+#        if tooltips == True:
+#            create_tooltips()
     elif variable == 'sudo':
         sudo = not sudo
-        """
-        if sudo == 'on':
-            sudo = 'off'
-        elif sudo == 'off':
-            sudo = 'on'
-        """
     elif variable == 'thor':
         if thor == 'internal':
             thor = 'external'
@@ -520,31 +474,43 @@ def on_window_close():
     except Exception as e:
         print(f'An exception occurred in on_window_close: {e}')
 
+class TooltipManager:
+    def __init__(self, tooltip_list):
+        self.tooltip_list = tooltip_list
+        self.tooltip_delay = 0.25
+
+    def create_tooltips(self, widget, widget_name):
+        for tooltip_widget, msg in self.tooltip_list:
+            if tooltip_widget == widget_name:
+                ToolTip(widget, msg=msg, delay=self.tooltip_delay, width=len(msg) * 10)
+            
 # My first-ever class :)
 class Button():
-    def __init__(self, name: str, master: ttk.Frame, text: str, command: typ.Callable, state: str = 'normal', 
-                column: int = 0, row: int = 0, sticky: str = 'we', padx: int = 5, pady: int = 5, 
-                columnspan: int = 1):
-        self.button_name = name + '_Button'
-        self.button_master = master
-        self.button_text = text
-        self.button_command = command
-        self.button_state = state
-        self.button_column = column
-        self.button_row = row
-        self.button_sticky = sticky
-        self.button_padx = padx
-        self.button_pady = pady
-        self.button_columnspan = columnspan
+    def __init__(self, name: str, master: ttk.Frame, text: str, command: typ.Callable,
+        state: str = 'normal', 
+        column: int = 0,
+        row: int = 0,
+        sticky: str = 'we',
+        padx: int = 5,
+        pady: int = 5, 
+        columnspan: int = 1):
+            
+        self.name = name + '_Button'
+        self.master = master
+        self.text = text
+        self.command = command
+        self.state = state
+        self.column = column
+        self.row = row
+        self.sticky = sticky
+        self.padx = padx
+        self.pady = pady
+        self.columnspan = columnspan
         self.tooltip_delay = 0.25
-        self.button = ttk.Button(self.button_master, text=self.button_text, command=self.button_command, state=self.button_state)
-        self.button.grid(column=self.button_column, row=self.button_row, columnspan=self.button_columnspan, sticky=self.button_sticky, padx=self.button_padx, pady=self.button_pady)
-        self.create_tooltip(tooltip_list)
-
-    def create_tooltip(self, tooltip_list: typ.Optional[typ.List[typ.Tuple[str, str]]] = None):
-        for tooltip_widget, msg in tooltip_list:
-            if tooltip_widget == self.button_name:
-                ToolTip(self.button, msg=msg, delay=self.tooltip_delay)
+        self.button = ttk.Button(self.master, text=self.text, command=self.command, state=self.state)
+        self.button.grid(column=self.column, row=self.row, columnspan=self.columnspan, sticky=self.sticky, padx=self.padx, pady=self.pady)
+        self.tooltip_manager = TooltipManager(tooltip_list)
+        self.tooltip_manager.create_tooltips(self.button, self.name)
 
     def __getattr__(self, attr):
         return getattr(self.button, attr)
@@ -571,16 +537,48 @@ class Entry():
         self.tooltip_delay = 0.25
         self.entry = ttk.Entry(self.master, state=self.state)
         self.entry.grid(column=self.column, row=self.row, columnspan=self.columnspan, sticky=self.sticky, padx=self.padx, pady=self.pady)
-        self.create_tooltip(tooltip_list)
-
-    def create_tooltip(self, tooltip_list: typ.Optional[typ.List[typ.Tuple[str, str]]] = None):
-        for tooltip_widget, msg in tooltip_list:
-            if tooltip_widget == self.name:
-                ToolTip(self.entry, msg=msg, delay=self.tooltip_delay)
+        self.tooltip_manager = TooltipManager(tooltip_list)
+        self.tooltip_manager.create_tooltips(self.entry, self.name)
 
     def __getattr__(self, attr):
         return getattr(self.entry, attr)
-    
+
+class Checkbutton():
+    def __init__(self, name: str, master: ttk.Frame, variable,
+        text: str = None,
+        style: str = None,
+        state: str = 'normal', 
+        column: int = 0,
+        row: int = 0,
+        sticky: str = 'we',
+        padx: int = 5,
+        pady: int = 5, 
+        columnspan: int = 1):
+
+        self.name = name + '_Checkbutton'
+        self.master = master
+        self.variable = variable
+        self.text = text,
+        self.style = style
+        self.state = state
+        self.column = column
+        self.row = row
+        self.sticky = sticky
+        self.padx = padx
+        self.pady = pady
+        self.columnspan = columnspan
+        self.tooltip_delay = 0.25
+        self.checkbutton = ttk.Checkbutton(self.master, variable=self.variable, state=self.state)
+        if self.text is not None and self.text[0] is not None:
+            self.checkbutton.config(text=self.text)
+        if self.style is not None and self.style[0] is not None:
+            self.checkbutton.config(style=self.style)
+        self.checkbutton.grid(column=self.column, row=self.row, columnspan=self.columnspan, sticky=self.sticky, padx=self.padx, pady=self.pady)
+        self.tooltip_manager = TooltipManager(tooltip_list)
+        self.tooltip_manager.create_tooltips(self.checkbutton, self.name)
+
+    def __getattr__(self, attr):
+        return getattr(self.checkbutton, attr)
 
 def create_label(name, master, text, font=('Monospace', 11), sticky='we', padx=0, pady=0, anchor='center'):
     label = name + '_Label'
@@ -636,25 +634,17 @@ Start_Flash_Button = Button('Start_Flash', window, 'Start', start_flash, 'disabl
 Reset_Button =Button('Reset', window, 'Reset', reset, 'normal', 10, 8, 'we', 5, 5, 2)
 
 # Creates the Odin Archive Check-boxes
-BL_Checkbox_var = tk.IntVar()
-BL_Checkbox = ttk.Checkbutton(window, variable=BL_Checkbox_var)
-BL_Checkbox.grid(row=3, column=7)
+BL_Checkbutton_var = tk.IntVar()
+AP_Checkbutton_var = tk.IntVar()
+CP_Checkbutton_var = tk.IntVar()
+CSC_Checkbutton_var = tk.IntVar()
+USERDATA_Checkbutton_var = tk.IntVar()
 
-AP_Checkbox_var = tk.IntVar()
-AP_Checkbox = ttk.Checkbutton(window, variable=AP_Checkbox_var)
-AP_Checkbox.grid(row=4, column=7)
-
-CP_Checkbox_var = tk.IntVar()
-CP_Checkbox = ttk.Checkbutton(window, variable=CP_Checkbox_var)
-CP_Checkbox.grid(row=5, column=7)
-
-CSC_Checkbox_var = tk.IntVar()
-CSC_Checkbox = ttk.Checkbutton(window, variable=CSC_Checkbox_var)
-CSC_Checkbox.grid(row=6, column=7)
-
-USERDATA_Checkbox_var = tk.IntVar()
-USERDATA_Checkbox = ttk.Checkbutton(window, variable=USERDATA_Checkbox_var)
-USERDATA_Checkbox.grid(row=7, column=7)
+BL_Checkbutton = Checkbutton('BL', window, BL_Checkbutton_var, state='normal', column=7, row=3)
+AP_Checkbutton = Checkbutton('AP', window, AP_Checkbutton_var, state='normal', column=7, row=4)
+CP_Checkbutton = Checkbutton('CP', window, CP_Checkbutton_var, state='normal', column=7, row=5)
+CSC_Checkbutton = Checkbutton('CSC', window, CSC_Checkbutton_var, state='normal', column=7, row=6)
+USERDATA_Checkbutton = Checkbutton('USERDATA', window, USERDATA_Checkbutton_var, state='normal', column=7, row=7)
 
 # Creates the Odin archive Buttons
 BL_Button = Button('BL', window, 'BL', lambda: open_file('BL'), 'normal', 8 , 3, 'we', 4)
@@ -772,8 +762,7 @@ if thor == "internal":
 elif thor == "external":
     other_thor = "the internal"
 
-Theme_Toggle = ttk.Checkbutton(Settings_Frame, text=f'{other_theme} theme', style='Switch.TCheckbutton', command=lambda: change_variable('theme'))
-Theme_Toggle.grid(row=1, column=0, padx=10, sticky='w')
+Theme_Toggle = Checkbutton('Theme', Settings_Frame, lambda: change_variable('theme'), other_theme + 'theme', 'Switch.TCheckbutton', 'normal', 0, 1, 'we', 10)
 
 Tooltip_Toggle = ttk.Checkbutton(Settings_Frame, text=f'Tooltips {other_tooltip}', style='Switch.TCheckbutton', command=lambda: change_variable('tooltips'))
 Tooltip_Toggle.grid(row=2, column=0, padx=10, sticky='w')
@@ -905,8 +894,8 @@ window.protocol('WM_DELETE_WINDOW', on_window_close)
 sv_ttk.set_theme(theme)
 
 # Creates tooltips for buttons and things
-if tooltips == True:
-    create_tooltips()
+#if tooltips == True:
+#    create_tooltips()
 
 # Shows the setup window if first_run == True
 if first_run == True:
