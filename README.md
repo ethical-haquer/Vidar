@@ -30,21 +30,75 @@ Want to contribute code or test things out? Follow the below directions to get V
 
 ## Prerequisites
 
+### Python
+
+If you're on Linux, you probably already have Python installed. Look [here](https://wiki.python.org/moin/BeginnersGuide/Download) if you don't.
+
 ### rich
 
 ```
 python -m pip install rich
 ```
 
-## Installation
+## GUI Prerequisites
 
+### Tkinter
+
+You probably already have Tkinter installed, but if you get "ModuleNotFoundError: No module named 'tkinter'", do this:
+
+Debian-based distros:
+
+```
+sudo apt-get install python3-tk
+```
+
+Fedora:
+
+```
+sudo dnf install python3-tkinter
+```
+
+### Sun Valley ttk theme
+
+```
+pip install sv-ttk
+```
+
+### tkinter-tooltip
+
+```
+pip install tkinter-tooltip
+```
+
+### tkinterdnd2-universal
+
+```
+pip install tkinterdnd2-universal
+```
+
+### To install all of the above Python packages
+
+```
+pip install sv-ttk tkinter-tooltip tkinterdnd2-universal
+```
+
+## Installation
++ First off, be sure to have the above prerequisites. If you will be using the GUI, also install the GUI prerequisites.
 + Click the green "<> Code" button above.
 + Click the "Download ZIP" button.
 + Extract the newly downloaded "Vidar-main.zip" file.
-+ Then run:
++ Then, to run the CLI Vidar:
+  
   ```
-  python3 PATH/TO/Vidar.py
+  python3 PATH/TO/vidar.py
   ```
+
++ Likewise, to run Vidar GUI:
+  
+  ```
+  python3 PATH/TO/vidar-gui.py
+  ```
+  
 + Have fun testing!
 
 ## License
