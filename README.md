@@ -17,7 +17,6 @@ Currently, Vidar is in a Pre-Alpha stage. That means it is under development and
 ## Known Bugs
 
 - Toggling theme doesn't do anything.
-- Toggling tool-tips doesn't do anything.
 
 ## Implemented Thor commands
 
